@@ -1,26 +1,32 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useLocation
+} from "react-router-dom";
+import { PublicRouters } from './routers/public.router';
+import { PrivateRoute } from './routers/routerMain';
+
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+  // window.localStorage.setItem("analytic","falso")  
+  const varSess = window.localStorage.getItem('analytic');
+  console.log(varSess);  
+
+  if (varSess) {
+    console.log('logeado');
+    
+  } else {
+    console.log('no logeado');
+  }
+  
+  return varSess!=='true'? <PublicRouters/>:<PrivateRoute/>
+  
 }
 
 export default App;
